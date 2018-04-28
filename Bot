@@ -1,0 +1,49 @@
+import discord
+from discord.ext.commands import Bot
+from discord.ext import commands
+import asyncio
+import time
+Client = discord.Client()
+client = commands.Bot(command_prefix = " ! ")
+
+chat_filter = ["CUNT", "NIGGAH", "NIGGER", "NIGGA"]
+bypass_list = []
+greetings = ["HELLO", "HEY", "HI"]
+
+@client.event 
+async def on_ready():
+  print("Bot is ready!")
+
+@client.event
+async def on_member_join(member):
+  await client.send_message(member, "Welcome to the official x2Twins Discord server. Please take a moment to read #welcome to make sure you know how our server runs. Also check out #rules if you are interested in scrims. Thankyou for joining the x2Twins community. :)")
+
+
+@client.event
+async def on_message(message):
+   
+  if message.content.upper() in greetings:
+        userID = message.author.id
+        await client.send_message(message.channel, "<@%s> Hi there" % (userID))
+        
+    #if message.content.upper().startswith('!SAY'):
+       # if message.author.id == "190389023104172041": #Replace <User ID> with the ID of the user you want to be able to execute this command!
+           # args = message.content.split(" ")
+           # await client.send_message(message.channel, "%s" % (" ".join(args[1:])))
+       # else:
+         #   await client.send_message(message.channel, "You do not have permission")
+            
+   # if message.content.upper().startswith('!AMIADMIN'):
+    #    if "407834361401180171" in [role.id for role in message.author.roles]: #Replace <Role ID> with the ID of the role you want to be able to execute this command
+       #     await client.send_message(message.channel, "You are an admin")
+     #   else:
+     #       await client.send_message(message.channel, "You are not an admin")
+
+  if message.content.upper().startswith('!HELP'):
+        userID = message.author.id
+        await client.send_message(message.channel, "<@%s> Check out #welcome and #rules for information about the server" % (userID))
+
+
+  if message.content.upper().startswith("!LONELY"):
+        await client.send_message(message.author, "I am here for you <3")
+
